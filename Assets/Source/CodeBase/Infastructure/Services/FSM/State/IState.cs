@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assets.Source.CodeBase
 {
-    internal class SceneLoader
+    public interface IState
     {
+        void Enter();
+        void Exit();
     }
 }
