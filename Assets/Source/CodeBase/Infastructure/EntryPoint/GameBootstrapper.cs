@@ -5,6 +5,8 @@ namespace Assets.Source.CodeBase
 {
     public class GameBootstrapper : MonoBehaviour
     {
+        [SerializeField] private PlayerBase _base;
+
         private GameStateMachine _stateMachine;
 
         private void Awake()

@@ -19,8 +19,8 @@ namespace Assets.Source.CodeBase
 
             };
 
-            _currentState = _states[0];
-            _currentState.Enter();
+            //_currentState = _states[0];
+            //_currentState.Enter();
         }
 
         public void Switch<T>() where T : IState
