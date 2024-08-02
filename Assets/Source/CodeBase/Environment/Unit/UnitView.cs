@@ -11,8 +11,6 @@ namespace Assets.Source.Code_base
         [SerializeField] private Animator _animator;
         //[SerializeField] private EnemyAudioController _audioController;
 
-        public event Action DieAnimationCanceled;
-
         //public void Starting() =>
         //    _audioController.PlayStart();
 
