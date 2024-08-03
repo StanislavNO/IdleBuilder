@@ -10,6 +10,16 @@ namespace Assets.Source.CodeBase
     {
         private List<IUnitState> _unitStates;
 
+        private IUnitState _currentState;
 
+        public UnitStateMachine()
+        {
+            _unitStates = new List<IUnitState>()
+            {
+                //new UnitMoveState(),
+                //new UnitWorkState(),
+                //new UnitResetState()
+            };
+        }
     }
 }

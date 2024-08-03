@@ -24,12 +24,12 @@ namespace Assets.Source.CodeBase
             _currentState.Update(this);
         }
 
-        public void GoToNextState()
-        {
-            if (_currentState == null || _unitStates == null) 
-                return;
+        //public void GoToNextState()
+        //{
+        //    if (_currentState == null || _unitStates == null) 
+        //        return;
 
-        }
+        //}
 
         private void CreateStates()
         {

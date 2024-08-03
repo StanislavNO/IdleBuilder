@@ -6,7 +6,7 @@ namespace Assets.Source.CodeBase.Environment
     {
         [SerializeField] private Transform _transform;
         [SerializeField] private float _speed;
-        [SerializeField][Range(-1, 1)] private int _sideRotation;
+        [SerializeField][Range(-1, 1)] private int _reverse;
 
         private void Update()
         {
@@ -15,7 +15,7 @@ namespace Assets.Source.CodeBase.Environment
 
         private void Rotate()
         {
-            float rotation = _sideRotation * _speed * Time.deltaTime;
+            float rotation = _reverse * _speed * Time.deltaTime;
             _transform.Rotate(Vector3.up, rotation);
         }
     }
