@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assets.Source.CodeBase
 {
-    public class GameData
+    public class Wallet
     {
-        public uint Coins { get; private set; }
+
     }
 }

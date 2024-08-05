@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Source.CodeBase
 {
@@ -15,6 +16,16 @@ namespace Assets.Source.CodeBase
         public void Init(UnitPool pool)
         {
             _pool = pool;
+        }
+
+        private void Start()
+        {
+            Spawn();
+        }
+
+        public void Spawn()
+        {
+            
         }
     }
 }
