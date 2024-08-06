@@ -3,40 +3,25 @@ using UnityEngine;
 
 namespace Assets.Source.CodeBase
 {
+    [RequireComponent(typeof(Collider))]
     public class Unit : MonoBehaviour, IUnit
     {
-        private List<IUnitState> _unitStates;
-
-        private IUnitState _currentState;
-
-        private void Awake()
-        {
-            CreateStates();
-        }
-
-        public Transform Target { get; private set; }
+        private UnitStateMachine _stateMachine;
+        private IStateSwitcher _stateSwitcher;
 
         private void Update()
         {
-            if (_currentState == null)
-                return;
-
-            _currentState.Update(this);
+            _stateMachine?.Update();
         }
 
-        //public void GoToNextState()
-        //{
-        //    if (_currentState == null || _unitStates == null) 
-        //        return;
-
-        //}
-
-        private void CreateStates()
+        private void OnTriggerEnter(Collider other)
         {
-            _unitStates = new List<IUnitState>()
-            {
+            _stateSwitcher.Switch<StopState>();
+        }
 
-            };
+        private void OnTriggerExit(Collider other)
+        {
+            _stateSwitcher.Switch<MoveState>();
         }
     }
 }

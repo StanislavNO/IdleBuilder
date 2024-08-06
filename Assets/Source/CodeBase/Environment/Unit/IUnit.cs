@@ -9,6 +9,5 @@ namespace Assets.Source.CodeBase
 {
     public interface IUnit
     {
-        public Transform Target { get; }
     }
 }

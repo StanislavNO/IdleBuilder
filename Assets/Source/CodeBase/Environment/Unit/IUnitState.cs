@@ -1,9 +1,7 @@
-﻿using Unity.VisualScripting;
-
-namespace Assets.Source.CodeBase
+﻿namespace Assets.Source.CodeBase
 {
-    public interface IUnitState
+    public interface IUnitState 
     {
-        void Update(IUnit unit);
+        void Update();
     }
 }

@@ -21,5 +21,10 @@ namespace Assets.Source.CodeBase
                 //new UnitResetState()
             };
         }
+
+        public void Update()
+        {
+            _currentState.Update();
+        }
     }
 }
