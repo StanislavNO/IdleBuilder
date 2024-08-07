@@ -3,7 +3,7 @@ using Unity.Jobs;
 
 namespace Assets.Source.CodeBase
 {
-    public class WorkState : MovementState, IState
+    public class WorkState : MovementState
     {
         private readonly Transform _resource;
         private readonly Vector3 _startResourceScale;
@@ -14,15 +14,14 @@ namespace Assets.Source.CodeBase
             _startResourceScale = resource.localScale;
         }
 
-        public void Enter()
+        public override void Enter()
         {
             HideResource(Exit);
         }
 
-        public void Exit()
+        public override void Exit()
         {
-
-            StateSwitcher.Switch<MoveState>();
+            StateSwitcher.SwitchState<MoveState>();
         }
 
         public override void Update()

@@ -3,15 +3,17 @@ using UnityEngine;
 
 namespace Assets.Source.CodeBase
 {
-    public class UnitData
+    public sealed class UnitData
     {
         private float _speed = 0;
 
         public UnitData(Transform basePoint, Transform endPoint, Transform unitTransform)
         {
+            StartPosition = unitTransform.position;
             BasePoint = basePoint;
             EndPoint = endPoint;
             UnitTransform = unitTransform;
+            MaxSpeed = 17;
         }
 
         public float Speed
@@ -26,6 +28,8 @@ namespace Assets.Source.CodeBase
             }
         }
 
+        public Vector3 StartPosition { get; private set; }
+        public float MaxSpeed { get; private set; }
         public float OffsetToTarget { get; private set; }
         public Transform BasePoint { get; private set; }
         public Transform EndPoint { get; private set; }

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 
 namespace Assets.Source.CodeBase
 {
-    public class StopState : MovementState, IState
+    public class StopState : MovementState
     {
         private float _maxDelta;
         private float _stopSpeed;
@@ -16,11 +16,11 @@ namespace Assets.Source.CodeBase
             _stopSpeed = 0;
         }
 
-        public void Enter()
+        public override void Enter()
         {
         }
 
-        public void Exit()
+        public override void Exit()
         {
         }
 
@@ -34,7 +34,7 @@ namespace Assets.Source.CodeBase
         private void Stopping()
         {
             float newSpeed = Mathf.MoveTowards(
-                Data.Speed, _stopSpeed, _maxDelta * Time.deltaTime);
+                Data.Speed, _stopSpeed, _maxDelta);
 
             Data.Speed = newSpeed;
         }

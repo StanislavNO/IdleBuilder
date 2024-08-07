@@ -8,6 +8,6 @@ namespace Assets.Source.CodeBase
 {
     public interface IStateSwitcher
     {
-        void Switch<T>() where T : IState;
+        void SwitchState<T>() where T : IState;
     }
 }

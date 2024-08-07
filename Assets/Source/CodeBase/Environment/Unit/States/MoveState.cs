@@ -3,29 +3,23 @@ using UnityEngine;
 
 namespace Assets.Source.CodeBase
 {
-    public class MoveState : MovementState, IState
+    public class MoveState : MovementState
     {
         private readonly Transform _basePoint;
         private readonly Transform _endPoint;
-
-        private Transform _target;
 
         public MoveState(IStateSwitcher stateSwitcher, UnitData data) : base(stateSwitcher, data)
         {
             _basePoint = data.BasePoint;
             _endPoint = data.EndPoint;
-
-            _target = _basePoint;
         }
 
-        public void Enter()
+        public override void Enter()
         {
-            throw new NotImplementedException();
         }
 
-        public void Exit()
+        public override void Exit()
         {
-            throw new NotImplementedException();
         }
 
         public override void Update()
@@ -34,25 +28,30 @@ namespace Assets.Source.CodeBase
 
             if (TryTouchToTarget())
             {
-                if (_target == _basePoint)
+                if (Target == _basePoint)
                 {
-                    _target = _endPoint;
-                    StateSwitcher.Switch<WorkState>();
+                    SetTarget(_endPoint);
+                    StateSwitcher.SwitchState<WorkState>();
                 }
-                else if (_target == _endPoint)
-                    StateSwitcher.Switch<StartState>();
+                else if (Target == _endPoint)
+                    StateSwitcher.SwitchState<ReapedState>();
             }
 
+            AddSpeed();
         }
 
-        private void SwitchTarget(Transform target)
+        private void AddSpeed()
         {
-            _target = target;
+            float speedDelta = 1;
+            float newSpeed = Mathf.MoveTowards(
+                Data.Speed, Data.MaxSpeed, speedDelta);
+
+            Data.Speed = newSpeed;
         }
 
         private bool TryTouchToTarget()
         {
-            float distance = (_target.position - Transform.position).magnitude;
+            float distance = (Target.position - Position).magnitude;
 
             if (distance < OffsetToTarget)
                 return true;

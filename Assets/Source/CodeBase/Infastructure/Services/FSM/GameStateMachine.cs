@@ -23,7 +23,7 @@ namespace Assets.Source.CodeBase
             //_currentState.Enter();
         }
 
-        public void Switch<T>() where T : IState
+        public void SwitchState<T>() where T : IState
         {
             throw new NotImplementedException();
         }

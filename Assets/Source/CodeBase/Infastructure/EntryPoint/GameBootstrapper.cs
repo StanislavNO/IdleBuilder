@@ -5,6 +5,11 @@ namespace Assets.Source.CodeBase
 {
     public class GameBootstrapper : MonoBehaviour
     {
+        [SerializeField] private Unit unit;
+        [SerializeField] private Transform baseTr;
+        [SerializeField] private Transform endTr;
+
+
         [SerializeField] private BaseUpdater _base;
 
         private GameStateMachine _stateMachine;
@@ -18,6 +23,11 @@ namespace Assets.Source.CodeBase
             _stateMachine = new();
 
             _base.Init(0);
+        }
+
+        private void Start()
+        {
+            unit.Init(new UnitData(baseTr,endTr,unit.transform));
         }
 
         private void OnCallGameReadyButtonClick()
