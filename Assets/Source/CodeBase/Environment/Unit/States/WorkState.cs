@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Unity.Jobs;
 
 namespace Assets.Source.CodeBase
 {
@@ -8,7 +7,7 @@ namespace Assets.Source.CodeBase
         private readonly Transform _resource;
         private readonly Vector3 _startResourceScale;
 
-        public WorkState(Transform resource ,IStateSwitcher stateSwitcher, UnitData data) : base(stateSwitcher, data)
+        public WorkState(Transform resource, IStateSwitcher stateSwitcher, UnitData data) : base(stateSwitcher, data)
         {
             _resource = resource;
             _startResourceScale = resource.localScale;
@@ -16,12 +15,15 @@ namespace Assets.Source.CodeBase
 
         public override void Enter()
         {
-            HideResource(Exit);
+            Debug.Log("WorkState");
+            HideResource();
         }
 
         public override void Exit()
         {
-            StateSwitcher.SwitchState<MoveState>();
+            Debug.Log("Exit Work");
+            SetTarget(Data.EndPoint);
+            Debug.Log(Data.Target.position);
         }
 
         public override void Update()
@@ -31,12 +33,10 @@ namespace Assets.Source.CodeBase
 
         }
 
-        private void HideResource(System.Action exit)
+        private void HideResource()
         {
-
-
             _resource.gameObject.SetActive(false);
-            exit.Invoke();
+            StateSwitcher.SwitchState<MoveState>();
         }
     }
 }

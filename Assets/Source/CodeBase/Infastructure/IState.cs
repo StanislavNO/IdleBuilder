@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Source.CodeBase
+﻿namespace Assets.Source.CodeBase
 {
-    public interface IState
+    public interface IState : ITickable
     {
         void Enter();
         void Exit();

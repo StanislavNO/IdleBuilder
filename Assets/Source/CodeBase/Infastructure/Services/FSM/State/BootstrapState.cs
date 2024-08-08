@@ -22,5 +22,10 @@ namespace Assets.Source.CodeBase
         {
             throw new NotImplementedException();
         }
+
+        public void Update()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

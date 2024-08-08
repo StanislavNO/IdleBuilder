@@ -2,24 +2,21 @@
 
 namespace Assets.Source.CodeBase
 {
-    public abstract class MovementState : IUnitState , IState
+    public abstract class MovementState : IState
     {
         private readonly Transform _transform;
 
         public MovementState(IStateSwitcher stateSwitcher, UnitData data)
         {
             StateSwitcher = stateSwitcher;
-            OffsetToTarget = data.OffsetToTarget;
             Data = data;
             _transform = Data.UnitTransform;
-            Target = Data.BasePoint;
+            Data.Target = Data.BasePoint;
         }
 
         protected IStateSwitcher StateSwitcher { get; private set; }
-        protected float OffsetToTarget { get; private set; }
         protected UnitData Data { get; private set; }
         protected Vector3 Position => _transform.position;
-        protected Transform Target { get; private set; }
 
         public virtual void Update() => Move();
 
@@ -27,12 +24,17 @@ namespace Assets.Source.CodeBase
         
         public abstract void Exit();
 
-        protected void SetTarget(Transform target) => Target = target;
+        protected void SetTarget(Transform target)
+        {
+            Data.Target = target;
+            Debug.Log("SetTarget " + Data.Target.position);
+        }
 
         private void Move()
         {
+            //Debug.Log("Move " + Data.Target.position);
             _transform.position = Vector3.MoveTowards(
-                _transform.position, Target.position, Data.Speed * Time.deltaTime);
+                _transform.position, Data.Target.position, Data.Speed * Time.deltaTime);
         }
     }
 }

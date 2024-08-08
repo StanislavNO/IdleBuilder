@@ -6,6 +6,7 @@ namespace Assets.Source.CodeBase
     public sealed class UnitData
     {
         private float _speed = 0;
+        private Transform _target;
 
         public UnitData(Transform basePoint, Transform endPoint, Transform unitTransform)
         {
@@ -13,7 +14,9 @@ namespace Assets.Source.CodeBase
             BasePoint = basePoint;
             EndPoint = endPoint;
             UnitTransform = unitTransform;
-            MaxSpeed = 17;
+            OffsetToTarget = 1f;
+            MaxSpeed = 37;
+            _target = basePoint;
         }
 
         public float Speed
@@ -26,6 +29,18 @@ namespace Assets.Source.CodeBase
 
                 _speed = value;
             }
+        }
+
+        public Transform Target 
+        { 
+            get => _target;
+            set
+            {
+                if (_target == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                _target = value;
+            } 
         }
 
         public Vector3 StartPosition { get; private set; }

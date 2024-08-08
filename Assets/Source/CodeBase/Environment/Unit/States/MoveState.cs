@@ -5,13 +5,8 @@ namespace Assets.Source.CodeBase
 {
     public class MoveState : MovementState
     {
-        private readonly Transform _basePoint;
-        private readonly Transform _endPoint;
-
         public MoveState(IStateSwitcher stateSwitcher, UnitData data) : base(stateSwitcher, data)
         {
-            _basePoint = data.BasePoint;
-            _endPoint = data.EndPoint;
         }
 
         public override void Enter()
@@ -28,13 +23,17 @@ namespace Assets.Source.CodeBase
 
             if (TryTouchToTarget())
             {
-                if (Target == _basePoint)
+                //Debug.Log("TryTouch");
+
+                if (Data.Target == Data.EndPoint)
                 {
-                    SetTarget(_endPoint);
-                    StateSwitcher.SwitchState<WorkState>();
-                }
-                else if (Target == _endPoint)
                     StateSwitcher.SwitchState<ReapedState>();
+                }
+                else if (Data.Target == Data.BasePoint)
+                {
+                    //Debug.Log("TargetBase");
+                    StateSwitcher.SwitchState<StopState>();
+                }
             }
 
             AddSpeed();
@@ -42,6 +41,7 @@ namespace Assets.Source.CodeBase
 
         private void AddSpeed()
         {
+            Debug.Log("AddSpeed" + Data.Speed + " Target" + Data.Target.position);
             float speedDelta = 1;
             float newSpeed = Mathf.MoveTowards(
                 Data.Speed, Data.MaxSpeed, speedDelta);
@@ -51,9 +51,10 @@ namespace Assets.Source.CodeBase
 
         private bool TryTouchToTarget()
         {
-            float distance = (Target.position - Position).magnitude;
+            float distance = (Data.Target.position - Position).magnitude;
+            //Debug.Log("distance = " + distance);
 
-            if (distance < OffsetToTarget)
+            if (distance < Data.OffsetToTarget)
                 return true;
 
             return false;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,13 +6,13 @@ namespace Assets.Source.CodeBase
 {
     public class UnitStateMachine : IStateSwitcher
     {
-        private List<IUnitState> _states;
+        private List<IState> _states;
 
-        private IUnitState _currentState;
+        private IState _currentState;
 
         public UnitStateMachine(UnitData unitData, Transform resource)
         {
-            _states = new List<IUnitState>()
+            _states = new List<IState>()
             {
                 new MoveState(this, unitData),
                 new WorkState(resource ,this, unitData),
@@ -32,9 +31,10 @@ namespace Assets.Source.CodeBase
 
         public void SwitchState<T>() where T : IState
         {
-            IUnitState state = _states.FirstOrDefault(state => state is T);
+            Debug.Log("Switch");
+            IState state = _states.FirstOrDefault(state => state is T);
 
-            _currentState?.Exit();
+            _currentState.Exit();
             _currentState = state;
             _currentState.Enter();
         }

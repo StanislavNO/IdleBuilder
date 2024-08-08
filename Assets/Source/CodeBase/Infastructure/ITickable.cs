@@ -1,6 +1,6 @@
 ﻿namespace Assets.Source.CodeBase
 {
-    public interface IUnitState : IState
+    public interface ITickable
     {
         void Update();
     }
