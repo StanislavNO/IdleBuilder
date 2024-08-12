@@ -2035,6 +2035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dron
       objectReference: {fileID: 0}
+    - target: {fileID: 7208433547018584879, guid: 30f01722a5f4ee1409348e518059033f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8024146468826607587, guid: 30f01722a5f4ee1409348e518059033f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 106.06
