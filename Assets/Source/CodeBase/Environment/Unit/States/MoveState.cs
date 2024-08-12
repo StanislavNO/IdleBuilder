@@ -36,23 +36,23 @@ namespace Assets.Source.CodeBase
                 }
             }
 
-            AddSpeed();
+            //AddSpeed();
         }
 
-        private void AddSpeed()
+        protected private override float GetSpeed()
         {
             Debug.Log("AddSpeed" + Data.Speed + " Target" + Data.Target.position);
-            float speedDelta = 1;
-            float newSpeed = Mathf.MoveTowards(
-                Data.Speed, Data.MaxSpeed, speedDelta);
+            float speedDelta = 0.1f;
+            float newSpeed = Mathf.Lerp(
+                Data.Speed, Data.MaxSpeed, speedDelta * Time.deltaTime);
 
-            Data.Speed = newSpeed;
+            return newSpeed;
         }
 
         private bool TryTouchToTarget()
         {
             float distance = (Data.Target.position - Position).magnitude;
-            //Debug.Log("distance = " + distance);
+            Debug.Log("distance = " + distance);
 
             if (distance < Data.OffsetToTarget)
                 return true;

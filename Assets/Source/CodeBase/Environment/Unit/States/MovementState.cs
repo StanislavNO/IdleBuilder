@@ -21,7 +21,7 @@ namespace Assets.Source.CodeBase
         public virtual void Update() => Move();
 
         public abstract void Enter();
-        
+
         public abstract void Exit();
 
         protected void SetTarget(Transform target)
@@ -33,8 +33,11 @@ namespace Assets.Source.CodeBase
         private void Move()
         {
             //Debug.Log("Move " + Data.Target.position);
+            Data.Speed = GetSpeed();
             _transform.position = Vector3.MoveTowards(
                 _transform.position, Data.Target.position, Data.Speed * Time.deltaTime);
         }
+
+        protected private virtual float GetSpeed() => Data.Speed;
     }
 }

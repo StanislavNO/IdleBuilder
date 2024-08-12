@@ -14,7 +14,7 @@ namespace Assets.Source.CodeBase
             BasePoint = basePoint;
             EndPoint = endPoint;
             UnitTransform = unitTransform;
-            OffsetToTarget = 1f;
+            OffsetToTarget = 20f;
             MaxSpeed = 37;
             _target = basePoint;
         }

@@ -16,13 +16,15 @@ namespace Assets.Source.CodeBase
         public override void Enter()
         {
             Debug.Log("WorkState");
-            HideResource();
+            Data.Speed = 0;
         }
 
         public override void Exit()
         {
             Debug.Log("Exit Work");
             SetTarget(Data.EndPoint);
+            _resource.gameObject.SetActive(false);
+            _resource.transform.localScale = _startResourceScale;
             Debug.Log(Data.Target.position);
         }
 
@@ -30,13 +32,16 @@ namespace Assets.Source.CodeBase
         {
             base.Update();
 
+            HideResource();
 
+            if (_resource.transform.localScale.magnitude <= 0.1f)
+                StateSwitcher.SwitchState<MoveState>();
         }
 
         private void HideResource()
         {
-            _resource.gameObject.SetActive(false);
-            StateSwitcher.SwitchState<MoveState>();
+            Vector3 newScale = Vector3.Lerp(_resource.transform.localScale, Vector3.zero, 1f * Time.deltaTime); 
+            _resource.transform.localScale = newScale;
         }
     }
 }

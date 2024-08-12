@@ -4,12 +4,12 @@ namespace Assets.Source.CodeBase
 {
     public class StopState : MovementState
     {
-        private float _maxDelta;
+        private float _speedDelta;
         private float _minSpeed;
 
         public StopState(IStateSwitcher stateSwitcher, UnitData data) : base(stateSwitcher, data)
         {
-            _maxDelta = 1f;
+            _speedDelta = 1f;
             _minSpeed = 0;
         }
 
@@ -25,18 +25,17 @@ namespace Assets.Source.CodeBase
         {
             base.Update();
 
-            Stopping();
+            if (Data.Speed <= _speedDelta)
+                StateSwitcher.SwitchState<WorkState>();
         }
 
-        private void Stopping()
+        protected private override float GetSpeed()
         {
-            float newSpeed = Mathf.MoveTowards(
-                Data.Speed, _minSpeed, _maxDelta);
+            float newSpeed = Mathf.Lerp(
+                Data.Speed, _minSpeed, _speedDelta * Time.deltaTime);
+            Debug.Log("Stopping" + Data.Speed);
 
-            Data.Speed = newSpeed;
-
-            if (Data.Speed <= _minSpeed)
-                StateSwitcher.SwitchState<WorkState>();
+            return newSpeed;
         }
     }
 }
